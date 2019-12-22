@@ -1,0 +1,6 @@
+db-sqlite3
+django
+djangorestframework
+django-cors-headers
+pdfkit
+social-auth-app-django
