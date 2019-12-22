@@ -1,0 +1,58 @@
+{% load static %}<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Default Title{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/united/bootstrap.min.css">
+    {% block stylesheet %}{% endblock %}
+  </head>
+  <body>
+    <header>
+    </br>
+
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary"> 
+        
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Invoice List<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/invoice/detail">Create new Invoice</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/invoice/client/add/">Add Client</a>
+            </li>
+          </ul>
+          {% if user.is_authenticated %}
+          <span class="badge badge-primary">Hi {{ user.username }}
+          </span>
+          <a class="navbar-brand" href="{% url 'logout' %}">logout</a>  
+        {% endif %}
+          
+            
+          
+        
+      </nav>
+    </header>
+    <main>
+      
+      <div class="card border-secondary">
+          {% block content %}
+          {% endblock %}
+      
+        </div>
+      
+    </main>
+  
+    <footer>
+      
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+
+    
+
+    {% block javascript %}{% endblock %}
+  </body>
+</html>

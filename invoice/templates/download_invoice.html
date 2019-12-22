@@ -1,0 +1,186 @@
+{% extends data.baseTemplate  %}
+
+
+    {% block content %}
+    <div class="container border">
+
+        {% if data.download == False %}
+         <div class="row">
+             <div class="col-md">
+             <a class="text-primary" style="font-size: x-large;"  href="/invoice/download/{{ data.invoice.id}}">Download pdf</a>
+            </div>
+            <div class="col-md text-right">
+             <a class="text-primary" style="font-size: x-large;" href="/invoice/edit/{{ data.invoice.id}}">Update/Delete Invoice</a>
+            </div>
+         </div>
+
+    {% endif %}
+ <div class="row jumbotron"  style="background-color: coral;">
+    
+    
+        <div class="col-md-3" >
+            <h1  style="color: floralwhite;"> INVOICE</h1>
+        </div>
+        
+        <div class="col-md-3" >
+            <diV class="container">
+            <div class="row">
+            <h3  style="color: cornsilk;"> 444-444-44</h3>
+        </div>
+        <div class="row">
+            <h3  style="color: cornsilk;"> email@.com</h3>
+        </div>
+        <div class="row">
+            <h3  style="color: cornsilk;"> www.website.com</h3>
+        </div>
+    </diV>
+        </div>
+
+
+        <div class="col-md-3" >
+            <diV class="container">
+                <div class="row">
+                <h3  style="color: cornsilk;"> 1 , your addres</h3>
+            </div>
+            <div class="row">
+                <h3  style="color: cornsilk;"> city,state, country </h3>
+            </div>
+            <div class="row">
+                <h3  style="color: cornsilk;"> zip code </h3>
+            </div>
+        </diV>
+        </div>
+        
+        
+      </div>
+
+ 
+
+           <div class="row" >
+            <div class="col-md" style="margin-left: 1rem;">            
+                <div class="row"><span class="text-secondary">Billing To</span>  </div>
+                <div class="row"> {{ data.invoice.client_id.name}} </div>
+                <div class="row"> {{ data.invoice.client_id.address}} </div>
+                <div class="row"> {{ data.invoice.client_id.city}}, {{ data.invoice.client_id.state}} , {{ data.invoice.client_id.country}} </div>
+                <div class="row"> {{ data.invoice.client_id.zip_code}} </div>
+            </div>
+
+            <div class="col-md">
+                <div class="row"><span class="text-secondary">Invoice No</span>  </div>
+                <div class="row"> {{ data.invoice.invoice_number}} </div>
+                <div class="row"> </div>
+                <div class="row"><span class="text-secondary">Date of issue</span>  </div>
+                <div class="row"> {{ data.invoice.issue_date}}</div>                
+            </div>
+            <div class="text-left col-md" >
+
+                <div class="row"><span   class="text-secondary">Invoice Total</span>  </div>
+                <div class="row"> <h1 class="text-primary" > $ {{ data.invoice.grandtotal}}</h1> </div>
+                
+            </div>
+        </div> 
+            <diV class="row">
+                    <div class="col-md">
+
+                <table class="table table-hover">
+                    <thead>   <tr>
+                        <th  class="text-left text-primary">Description</th>
+                        <th class="text-right text-primary">Unit Cost</th>
+                        <th class="text-right text-primary">Qty /Hr Rate</th>
+                        <th class="text-right text-primary">Amount</th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                          <th colspan="2">                            
+                          </th>                  
+                          <th class="text-right">    
+                              <h4 class="text-primary"> Sub Total </h4>
+                            
+                          </th> 
+                          <th class="text-right">
+                            
+                              <h4> $ {{ data.invoice.subtotal}}  </h4>
+                            
+                          </th>
+                        </tr>
+                        <tr>
+                          <th colspan="2"></th>
+                          <th class="text-right">
+                            
+                              <h4 class="text-primary"> Tax </h4>
+                            
+                          </th>
+                          <th  class="text-right">
+                            <h4> $ {{ data.invoice.tax}}  </h4>
+                          </th >
+                        </tr>
+                        <tr>
+                          <th colspan="2"></th>
+                          <th class="text-right">
+                            
+                              <h4 class="text-primary"> Total </h4>
+                            
+                          </th>
+                          <th class="text-right"> 
+
+                                <h4> $ {{ data.invoice.grandtotal}}  </h4>
+                            
+                          </th> 
+                                               
+                        </tr>
+                  
+                  
+                        <tr>
+                          <th colspan="4">          
+                            <span class="text-secondary">Invoice Terms</span>                           
+                  
+                          </th> 
+                             </tr>
+                        <tr>
+                          <th colspan="2" >
+                              <span>{{ data.invoice.invoice_terms}} </span>
+                          </th>
+                          <th class="text-right">
+                            
+                            <h4 class="text-primary"> Amount Due(USD) </h4>
+                          
+                        </th>
+                        <th class="text-right"> 
+
+                              <h4> $ {{ data.invoice.grandtotal}}  </h4>
+                          
+                        </th> 
+                  
+                  
+                        </tr>
+                      </tfoot>
+
+                      <tbody>
+                {% for item in data.invoice_items %}
+                <tr>
+                    <td>
+                        <div class="container">
+                         <div class="row"> 
+                        {{ item.item_name }}
+                    </div>
+                    <div class="row"> 
+                        <span class="text-secondary">{{ item.item_description }}</span>                        
+                    </div>
+                </div>
+                 </td>        
+                    <td class="text-right">{{ item.unit_cost }}</td>                    
+                    <td class="text-right">{{ item.quantity }}</td>
+                    <td class="text-right">{{ item.amount }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+            </diV>
+          
+
+
+    </div>
+
+    {% endblock %}

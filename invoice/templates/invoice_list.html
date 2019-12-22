@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+
+{% block javascript %}
+
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="container">
+
+      {% if total_invoices == 0 %}
+      
+      <div class="row">
+
+        <p class="text-primary"  style="font-size:x-large;"> You have not created any Invoice. Please click  <a class="text-secondary"  href="/invoice/detail"> here</a> to create new invoice  </p>        
+      </div>
+
+    
+{% else %}
+
+<div class="row">
+
+  <p class="text-primary"  style="font-size:x-large;">Invoice List ( Total : {{total_invoices}} ) </p>        
+</div>
+
+    <table class="table table-hover border">
+        <thead>          <tr>
+            <th scope="col">Invoice Number</th>
+            <th scope="col">Invoice version</th>
+            <th scope="col">Issue Date</th>
+            <th scope="col">Tax</th>
+            <th scope="col">Sub Total</th>
+            <th scope="col">Total </th>
+            <th scope="col"> Action </th>
+
+          </tr>
+        </thead>
+        </tr>
+    {% for item in invoices %}
+    <tr>
+        <td>{{ item.invoice_number }}</td>        
+        <td>{{ item.version }}</td>
+        <td>{{ item.issue_date }}</td>
+        <td>{{ item.tax }}</td>
+        <td>{{ item.subtotal }}</td>
+        <td>{{ item.grandtotal }}</td>
+        <td> <a class="nav-link" href="view/{{ item.id }}"> Detail </a> </td>
+
+    </tr>
+    {% endfor %}
+</table>
+
+{% endif %}
+</div>
+
+
+{% endblock %}

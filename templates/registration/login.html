@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div  class="row">
+  <div class="col-md"> 
+
+    <div class="card border-secondary mb-3" style="max-width: 20rem;">
+      <div class="card-header">Login with Django Server</div>
+      <div class="card-body">
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button class="btn btn-primary" type="submit">Login</button>
+        </form>
+        
+        </a>
+      </div>
+    </div>
+
+</div>
+<div class="col-md"> 
+    
+   <div class="card border-secondary mb-3" style="max-width: 20rem;">
+    <div class="card-header">Login with Social Media</div>
+    <div class="card-body">
+      <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook
+      </a>
+    </div>
+  </div>
+  </div>
+</div>
+
+ 
+
+</div>
+ 
+{% endblock %}
